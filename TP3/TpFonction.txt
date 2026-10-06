@@ -1,0 +1,76 @@
+1 - CREATE DATABASE `mezabi3` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci USE `basetest`;
+
+2 - 
+
+/* Fonction
+   SI  ANNEEMOIS == ANNEEMOIS de AJD :
+       NvNO_FCT = MaxNo_FCT + 1
+       return NvNO_FCT 
+   SINON 
+	NvNO_FCT = ANNEEMOIS000
+	RETURN fonction 
+*/
+
+DELIMITER //
+DROP function IF EXISTS ajouterFacture //
+CREATE FUNCTION ajouterFacture(idClient INT)
+RETURNS INT
+BEGIN 
+    DECLARE anneeMois INT DEFAULT DATE_FORMAT(CURDATE(), '%Y%m') + 000;
+    DECLARE noFacture INT ;
+    SET mmm = (SELECT MAX(NO_FCT) FROM factures_entetes where DATE_FORMAT(DATE_FCT, '%Y%m')= CURDATE());
+
+    IF mmm IS NULL THEN
+		SET noFacture = NO_FCT + 1 ;
+    ELSE
+		SET noFacture = DATE_FORMAT(CURDATE(), '%Y%m') + 001;
+    RETURN noFacture; 
+END; //
+DELIMETER; 
+
+
+
+3- UPDATE stockprix set CODE_BARRE = NULL;
+
+
+
+4- (right(concat('00000','1')5) = 00001
+
+DELIMITER //
+DROP function IF EXISTS genereCodeBarre//
+CREATE FUNCTION genereCodeBarre (idClient INT)
+RETURNS VARCHAR(13)
+BEGIN 
+    DECLARE codeBarre varchar(13);
+    DECLARE debut_code varchar(7);
+    DECLARE recup_milieu varchar(5);
+    DECLARE milieu_code INT;
+    DECLARE cle INT;
+    DECLARE somme_p INT;
+    DECLARE somme_imp INT;
+    DECLARE i INT ; 
+    SET debut_code = SELECT CONTENU_A from parametres WHERE ID = 'DEB_GENCODE';
+    SET recup_milieu = SELECT CONTENU_N from parametres WHERE ID = 'LAST_GENCODE' + 1;
+    SET milieu_code = RIGHT(CONCAT('00000',recup_milieu)5);
+    SET codeBarre = CONCAT(debut_code, milieu_code,0); 
+    SET i = 1;
+    REPEAT 
+	IF MOD(i,2) == 0 THEN 
+	    SET somme_p += SUBSTRING(codeBarre,i,1);
+	    SET i ++; 
+	ELSE THEN 
+	    SET somme_imp += SUBSTRING(codeBarre,i,1);
+	    SET i ++; 
+	END IF; 
+
+    UNTIL i >= 12
+    END REPEAT ; 
+
+    SET sommeImp *= 3
+    RETURN codeBarre;
+END; //
+DELIMETER; 
+
+for avec i indice si i pair ajt somme_p sinon ajt somme_imp
+
+total div 10) +1 )*10)-total

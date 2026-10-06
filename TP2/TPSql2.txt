@@ -1,0 +1,59 @@
+2) insert into a_couleurs (DESIGNATION) values ('rouge'),('vert'),('bleu'),('noir'); 
+
+5)insert into articles (CATEGORIE, CODE_ARTICLE, DESIGNATION) values (1,'PTL002','pantalon_taille_basse');
+6)
+	insert into stockprix (ARTICLE, CODE_BARRE, COULEUR, PRIX, STOCK, TAILLE) values (1, '0000000000001', 1, 35.90, 10, 2);
+	insert into stockprix (ARTICLE, CODE_BARRE, COULEUR, PRIX, STOCK, TAILLE) values (1, '0000000000002', 3, 36.90, 150, 1);
+7) UPDATE stockprix SET STOCK = 160 where couleur = 3 ;
+8)DELETE from stockprix where couleur = 1;
+9)DELETE from stockprix where couleur = 3;
+DELETE from articles where CODE_ARTICLE = "PTL002";
+10)DROP TABLE stockprix, articles, a_categories, a_couleurs, a_tailles;
+11)SELECT CODE_ARTICLE, DESIGNATION FROM articles WHERE CATEGORIE = 3;
+12) SELECT CODE_ARTICLE, DESIGNATION 
+FROM articles 
+WHERE CATEGORIE = 3;
+13)SELECT a.CODE_ARTICLE, a.DESIGNATION, c.DESIGNATION 
+FROM articles a
+JOIN a_categories c ON a.CATEGORIE = c.CODE_CATEGORIE
+WHERE a.CATEGORIE = 3;
+14)SELECT a.CODE_ARTICLE, a.DESIGNATION, s.STOCK
+FROM articles a
+JOIN stockprix s ON a.ID_ARTICLE = s.ARTICLE
+WHERE s.STOCK < 100
+ORDER BY a.CODE_ARTICLE, s.STOCK;
+15)SELECT a.CODE_ARTICLE, a.DESIGNATION, co.DESIGNATION AS COULEUR, 
+       t.DESIGNATION AS TAILLE, s.STOCK, s.PRIX
+FROM articles a
+JOIN stockprix s ON a.ID_ARTICLE = s.ARTICLE
+JOIN a_couleurs co ON s.COULEUR = co.CODE_COULEUR
+JOIN a_tailles t ON s.TAILLE = t.CODE_TAILLE
+WHERE s.STOCK < 100
+ORDER BY a.CODE_ARTICLE, co.DESIGNATION, t.DESIGNATION, s.STOCK;
+16)SELECT MAX(PRIX) AS MAXIMUM FROM stockprix;
+17)SELECT a.CODE_ARTICLE, a.DESIGNATION, co.DESIGNATION AS COULEUR, 
+       t.DESIGNATION AS TAILLE, s.STOCK, s.PRIX
+FROM articles a
+JOIN stockprix s ON a.ID_ARTICLE = s.ARTICLE
+JOIN a_couleurs co ON s.COULEUR = co.CODE_COULEUR
+JOIN a_tailles t ON s.TAILLE = t.CODE_TAILLE
+WHERE s.PRIX = (SELECT MAX(PRIX) FROM stockprix)
+ORDER BY a.CODE_ARTICLE, co.DESIGNATION, t.DESIGNATION, s.STOCK; puis 17 pour tester
+18)UPDATE stockprix SET PRIX = PRIX * 0.9;
+19)SELECT fe.NO_FCT, fe.DATE_FCT, cl.NOM_MAGASIN, cl.RESPONSABLE, 
+       a.CODE_ARTICLE AS ARTICLE, a.DESIGNATION, 
+       co.DESIGNATION AS COULEUR, t.DESIGNATION AS TAILLE, 
+       fl.QUANTITE, fl.PRIX, (fl.QUANTITE * fl.PRIX) AS MONTANT
+FROM factures_lignes fl
+JOIN factures_entetes fe ON fl.ID_FCT = fe.ID_ENT_FCT
+JOIN clients cl ON fe.CLIENT = cl.ID_CLIENT
+JOIN articles a ON fl.ARTICLE = a.ID_ARTICLE
+JOIN a_couleurs co ON fl.COULEUR = co.CODE_COULEUR
+JOIN a_tailles t ON fl.TAILLE = t.CODE_TAILLE
+ORDER BY fe.NO_FCT;
+20)SELECT fe.NO_FCT, fe.DATE_FCT, cl.NOM_MAGASIN, cl.RESPONSABLE, 
+       SUM(fl.QUANTITE * fl.PRIX) AS MONTANT
+FROM factures_lignes fl
+JOIN factures_entetes fe ON fl.ID_FCT = fe.ID_ENT_FCT
+JOIN clients cl ON fe.CLIENT = cl.ID_CLIENT
+GROUP BY fe.NO_FCT, fe.DATE_FCT, cl.NOM_MAGASIN, cl.RESPONSABLE;
