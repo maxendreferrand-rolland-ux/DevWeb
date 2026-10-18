@@ -1,0 +1,134 @@
+/* page */
+body {
+    font-family: 'Fredoka', sans-serif;
+    color: #AE3030;
+    background: linear-gradient(#8EB3C8, white) fixed;
+    min-height: 100vh;
+}
+
+/* cadres */
+.cadre {
+    border: 3px solid #1B4B67;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 5px;
+    background: linear-gradient(#8EB3C8, white) fixed;
+}
+
+/* titres */
+h1 {
+    font-size: 2em;
+    font-weight: bold;
+    text-align: center;
+}
+
+h2 {
+    font-size: 2em;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* entete */
+.logo {
+    height: 170px;
+    max-width: 100%;
+    object-fit: cover;
+    padding: 5px;
+    border-radius: 15px;
+}
+
+.presentation p {
+    font-size: 1.75em;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* contenu index */
+.mode-emploi {
+    background: url("../images/devanture.jpg") center / cover;
+    font-size: 1.75em;
+    font-weight: bold;
+    text-align: center;
+}
+
+.icones {
+    background: url("../images/devanture2.jpg") center / cover;
+    margin: 5px;
+}
+
+.icones div {
+    text-align: center;
+    border: none;
+}
+
+.icones img {
+    height: 150px;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+/* formulaire */
+.formulaire label {
+    color: black;
+    font-weight: bold;
+    display: block;
+    text-align: center;
+}
+
+.formulaire .form-control,
+.formulaire .form-select,
+.formulaire .btn {
+    font-weight: bold;
+}
+
+/* tableaux */
+.tableau {
+    text-align: center;
+    font-weight: bold;
+}
+
+.tableau thead th,
+.tableau tbody tr:nth-child(even) td {
+    --bs-table-bg: #F2F2F2;
+}
+
+/* pied de page */
+.pied {
+    color: #AE3030;
+    font-size: 1.75em;
+    font-weight: bold;
+    text-align: center;
+}
+
+.logo-iut {
+    width: 100px;
+}
+
+/* liens */
+a {
+    color: #AE3030;
+}
+
+a:visited {
+    color: gray;
+}
+
+/* images qui grossissent au survol */
+img {
+    transition: transform 0.3s;
+}
+
+img:hover {
+    transform: scale(1.2);
+}
+
+/* tablette */
+@media (max-width: 991px) {
+    .logo {
+        height: 100px;
+    }
+
+    .icones img {
+        height: 50px;
+    }
+}
