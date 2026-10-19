@@ -22,16 +22,18 @@
 		
 			<div class="row cadre ">	 
 				<div class="col-12">
-					<form method="post" action="tableauPhrases.php">
-					<?php
-						foreach($tabExGen as $i => $value){
-							echo "<select name='var".$i."'>";
-							foreach($value as $cle => $tabEx){
-								echo "<option value='".$cle."'>".$tabEx."</option>";
+					<form method="post" action="afficheExcuse.php">
+						<?php
+							foreach($tabExGen as $i => $value){
+								echo "<select name='var".$i."'>";
+								foreach($value as $cle => $tabEx){
+									echo "<option value='".$cle."'>".$tabEx."</option>";
+								}
+								echo "</select><br>";
 							}
-							echo "</select><br>";
-						}
-					?>
+						?>
+						<button type="submit">Générer l'excuse</button>
+					</form>
 				</div>
 			</div>
 		</div>
