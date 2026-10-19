@@ -23,15 +23,16 @@
 			<div class="row cadre ">	 
 				<div class="col-12">
 					<form method="post" action="tableauPhrases.php">
-					<?php
-						foreach($tabExGen as $i => $value){
-							echo "<select name='var".$i."'>";
-							foreach($value as $cle => $tabEx){
-								echo "<option value='".$cle."'>".$tabEx."</option>";
+						<?php
+							foreach($tabExGen as $i => $value){
+								echo "<select name='var".$i."'>";
+								foreach($value as $cle => $tabEx){
+									echo "<option value='".$cle."'>".$tabEx."</option>";
+								}
+								echo "</select><br>";
 							}
-							echo "</select><br>";
-						}
-					?>
+						?>
+					</form>
 				</div>
 			</div>
 		</div>
